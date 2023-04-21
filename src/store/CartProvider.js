@@ -22,9 +22,8 @@ const CartProvider = (props) => {
 
 };
 
-  const removeItemToCartHandler = (item) => {
+  const decreaseItemToCartHandler = (item) => {
     let itemsCopy = [...items];
-    console.log(' empty dummy item',itemsCopy)
 
     let Id = itemsCopy.findIndex((i) => i.id === item.id )
 
@@ -40,7 +39,6 @@ const CartProvider = (props) => {
 
  const increaseItemHandler = (item) => {
   let itemsCopy = [...items];
-  console.log('empty dummy item',itemsCopy);
 
   let Id = itemsCopy.findIndex((i) => i.id === item.id );
 
@@ -50,6 +48,15 @@ const CartProvider = (props) => {
   }
 };
 
+const removeItemHandler = (item) => {
+  let itemsCopy = [...items];
+  let Id = itemsCopy.findIndex((i) => i.id === item.id );
+
+  if (Id !== -1) {
+    itemsCopy.splice(Id, 1);
+    setUpdateItems(itemsCopy);
+  }
+};
 
 
 
@@ -62,8 +69,9 @@ const CartProvider = (props) => {
     items: items,
     totalAmount: totalPrice,
     addItem: addItemToCartHandler,
-    removeItem: removeItemToCartHandler,
+    decreaseItem: decreaseItemToCartHandler,
     increaseItem: increaseItemHandler,
+    removeItem: removeItemHandler,
   };
   
   return (
